@@ -1,0 +1,7 @@
+language: perl6
+sudo: false
+perl6:
+  - '2016.12'
+install:
+  - rakudobrew build-zef
+  - zef install JSON::Tiny Net::HTTP
