@@ -13,14 +13,13 @@ my SetHash $sessions;
 
 method BUILD(
       Hash:D :$capabilities = {},
-       Str:D :$host         = 'localhost',
+       Str:D :$host         = '127.0.0.1',
     uint16:D :$port!,
 ) {
     $!base = "http://$host:$port/session";
 
-    my $res = self!post :desiredCapabilities($capabilities);
-
-    $!capabilities = $res.<value>;
+    my $res = $!capabilities
+            = self!post(:desiredCapabilities($capabilities)).<value>;
 
     $sessions.{ $!base ~= "/$res.<sessionId>" } = True;
 }
@@ -40,7 +39,7 @@ method url          of Str  { self!get: 'url'    }
 method user-agent   of Str  { self.js:  'return window.navigator.userAgent' }
 
 method get(Str:D $url) {
-    self!post: 'url', :$url;
+    self!post: '/url', :$url;
     self;
 }
 

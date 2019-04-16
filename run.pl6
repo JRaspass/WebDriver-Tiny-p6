@@ -1,6 +1,6 @@
 use WebDriver::Tiny;
 
-my $drv = WebDriver::Tiny.new(:8910port);
+my $drv = WebDriver::Tiny.new(:4444port);
 
 $drv.get('https://www.google.co.uk');
 
